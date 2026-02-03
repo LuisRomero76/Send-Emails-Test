@@ -5,7 +5,8 @@ export class CreateProductDto {
   @IsNotEmpty()
   name: string;
 
-  @IsNumber()
-  @Min(0)
+  @IsNumber({}, { message: 'El precio debe ser un número' })
+  @IsNotEmpty({ message: 'El precio es obligatorio' })
+  @Min( 0, { message: 'El precio no puede ser negativo' } )
   price: number;
 }

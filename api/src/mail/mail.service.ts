@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
-import { CreatePurchaseDto } from 'src/compra/dto/create-compra.dto';
+import { CrearCompraDto } from 'src/compra/dto/create-compra.dto';
 
 @Injectable()
 export class MailService {
@@ -20,11 +20,11 @@ export class MailService {
     this.transporter = nodemailer.createTransport(mailConfig);
   }
 
-  async sendPurchaseEmail(data: CreatePurchaseDto) {
+  async EnviarEmailDeCompra(data: CrearCompraDto) {
     const { email, nombre, apellido, productoNombre, precio, telefono } = data;
 
     const mailOptions = {
-      from: `"Tienda Engaged" <${this.configService.get<string>('MAIL_USER')}>`,
+      from: `"Tienda online de" <${this.configService.get<string>('MAIL_USER')}>`,
       to: email,
       subject: `Confirmación de Compra: ${productoNombre}`,
       html: `
@@ -50,15 +50,9 @@ export class MailService {
     try {
       await this.transporter.verify();
       const info = await this.transporter.sendMail(mailOptions);
-      
       return info;
     } catch (error) {
       console.error('Error al enviar el correo:', error);
-      console.error('Detalles del error:', {
-        message: error.message,
-        code: error.code,
-        command: error.command,
-      });
       throw error;
     }
   }

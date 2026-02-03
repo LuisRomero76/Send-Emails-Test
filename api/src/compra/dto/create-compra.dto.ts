@@ -1,6 +1,6 @@
 import { IsEmail, IsNotEmpty, IsString, IsNumber, Min } from 'class-validator';
 
-export class CreatePurchaseDto {
+export class CrearCompraDto {
   @IsString()
   @IsNotEmpty({ message: 'El nombre es requerido' })
   nombre: string;

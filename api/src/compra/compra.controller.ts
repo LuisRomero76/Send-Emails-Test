@@ -1,6 +1,6 @@
 import { Body, Controller, Post, HttpException, HttpStatus } from '@nestjs/common';
 import { MailService } from 'src/mail/mail.service';
-import { CreatePurchaseDto } from './dto/create-compra.dto';
+import { CrearCompraDto } from './dto/create-compra.dto';
 
 @Controller('compra')
 export class CompraController {
@@ -11,10 +11,10 @@ export class CompraController {
 
     @Post()
     async crearCompra(
-        @Body() compraData: CreatePurchaseDto
+        @Body() compraData: CrearCompraDto
     ) {        
         try {
-            const result = await this.mailService.sendPurchaseEmail(compraData);
+            const result = await this.mailService.EnviarEmailDeCompra(compraData);
 
             return {
                 success: true,
@@ -22,7 +22,7 @@ export class CompraController {
                 messageId: result.messageId,
             };
         } catch (error) {
-            console.error('❌ Error en crearCompra:', error);
+            console.error('Error en crearCompra:', error);
             throw new HttpException(
                 {
                     success: false,
