@@ -24,7 +24,7 @@ export class MailService {
     const { email, nombre, apellido, productoNombre, precio, telefono } = data;
 
     const mailOptions = {
-      from: `"Tienda online de" <${this.configService.get<string>('MAIL_USER')}>`,
+      from: `"Tienda online" <${this.configService.get<string>('MAIL_USER')}>`,
       to: email,
       subject: `Confirmación de Compra: ${productoNombre}`,
       html: `
@@ -34,7 +34,7 @@ export class MailService {
           <div style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; margin: 20px 0;">
             <h3 style="margin-top: 0;">Producto</h3>
             <p><strong>Nombre:</strong> ${productoNombre}</p>
-            <p><strong>Precio:</strong> $${precio}</p>
+            <p><strong>Precio:</strong> Bs. ${precio}</p>
           </div>
           <div style="background-color: #f4f4f4; padding: 15px; border-radius: 5px;">
             <h3 style="margin-top: 0;">Tus Datos</h3>
@@ -42,7 +42,7 @@ export class MailService {
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Teléfono:</strong> ${telefono}</p>
           </div>
-          <p style="margin-top: 20px;">Gracias por confiar en nosotros.</p>
+          <p style="margin-top: 20px;">Gracias por la confianza.</p>
         </div>
       `,
     };
